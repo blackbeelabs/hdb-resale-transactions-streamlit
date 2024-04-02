@@ -86,7 +86,11 @@ avg_psf["Mean PSF"] = avg_psf["Mean PSF"].apply(lambda x: f"${x:,.2f}")
 c1 = volume.copy()
 st.markdown("##### Volume by Type")
 l1, l2 = st.columns(2)
-l1.dataframe(c1.transpose())
+l1.dataframe(
+    c1,
+    hide_index=True,
+    use_container_width=True,
+)
 l2.bar_chart(c1, x="Type")
 
 vol_by_town = df_result.groupby("Town").size().reset_index(name="No of txns")

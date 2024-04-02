@@ -53,13 +53,17 @@ for type in flat_types:
     st.markdown(f"### {type}")
     # if counter % 2 == 0:
 
-    st.markdown(f"#### No. of units sold per year")
-    st.dataframe(dftown_txns.transpose())
-    col1, col2 = st.columns(2)
-    col1.markdown(f"#### Price trends")
-    col1.line_chart(dftown_agg, x="year_of_sale")
-    col2.markdown(f"#### PSF trends")
-    col2.line_chart(dfpsf_agg, x="year_of_sale")
+    col1, col2, col3 = st.columns(3)
+    col1.markdown(f"#### No. of units sold per year")
+    col1.dataframe(
+        dftown_txns,
+        hide_index=True,
+    )
+
+    col2.markdown(f"#### Price trends")
+    col2.line_chart(dftown_agg, x="year_of_sale")
+    col3.markdown(f"#### PSF trends")
+    col3.line_chart(dfpsf_agg, x="year_of_sale")
     # elif counter % 2 == 1:
     #     col2.markdown(f"#### {type}")
     #     col2.markdown(f"*No. of units sold per year*")

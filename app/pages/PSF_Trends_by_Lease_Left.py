@@ -12,7 +12,6 @@ df = pd.read_csv(
 
 st.markdown("# Price Trend (PSF) by Lease Left")
 
-col1, col2 = st.columns(2)
 counter = 0
 years_of_sale = df["year_of_sale"].copy().drop_duplicates()
 years_of_sale = years_of_sale.sort_values(ascending=False)
@@ -43,10 +42,5 @@ for yr in years_of_sale:
         .reset_index(name="25th Pctile PSF")
     )
     dfyr_agg = dfyr_mean.merge(dfyr_median).merge(dfyr_pct95).merge(dfyr_pct25)
-    if counter % 2 == 0:
-        col1.markdown(f"#### {yr}")
-        col1.line_chart(dfyr_agg, x="lease_left")
-    elif counter % 2 == 1:
-        col2.markdown(f"#### {yr}")
-        col2.line_chart(dfyr_agg, x="lease_left")
-    counter += 1
+    st.markdown(f"#### {yr}")
+    st.line_chart(dfyr_agg, x="lease_left")

@@ -104,16 +104,24 @@ else:
     st.write(f"No search results. Please try again")
 
 if df_result.shape[0] > 1:
-    st.dataframe(df_result)
+    st.dataframe(
+        df_result,
+        hide_index=True,
+        use_container_width=True,
+    )
 else:
-    st.dataframe(df.head(20))
+    st.dataframe(
+        df.head(20),
+        hide_index=True,
+        use_container_width=True,
+    )
 
 if df_result.shape[0] > 0:
     c = df_result.shape[0]
     st.write(f"{c:,.0f} transaction(s) found")
 
 if count_uniq_addresses == 1:
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     unique_years = df[["Year of Sale"]].copy().drop_duplicates()
 
     count_txns = df_result.groupby("Year of Sale").size().reset_index(name="No of txns")
@@ -135,7 +143,11 @@ if count_uniq_addresses == 1:
     col1.write(f"#### No. of Transactions by Year")
     col1.bar_chart(count_txns, x="Year of Sale", y="No of txns")
     col2.write(f"#### No. of Transactions by Type")
-    col2.dataframe(count_room_txns.transpose())
+    col2.dataframe(
+        count_room_txns,
+        hide_index=True,
+        use_container_width=True,
+    )
 
     psf0 = (
         df_result.groupby("Year of Sale")["PSF (SGD)"]
@@ -169,5 +181,9 @@ if count_uniq_addresses == 1:
     psf_df["75th pctle PSF"] = psf_df["75th pctle PSF"].apply(
         lambda x: f"${x:.2f}" if not x == "(No txns)" else x
     )
-    col2.markdown("#### PSF trends")
-    col2.dataframe(psf_df.transpose())
+    col3.markdown("#### PSF trends")
+    col3.dataframe(
+        psf_df,
+        hide_index=True,
+        use_container_width=True,
+    )

@@ -126,11 +126,19 @@ st.markdown(
 df_result = filter_dataframe(df)
 
 if df_result.shape[0] > 1:
-    st.dataframe(df_result)
+    st.dataframe(
+        df_result,
+        hide_index=True,
+        use_container_width=True,
+    )
 else:
     st.markdown(f"No search results. Please try again")
     st.markdown(f"(Displaying a sample)")
-    st.dataframe(df.head(4))
+    st.dataframe(
+        df.head(4),
+        hide_index=True,
+        use_container_width=True,
+    )
 if df_result.shape[0] > 0:
     c = df_result.shape[0]
     st.markdown(f"{c:,.0f} transaction(s) found")

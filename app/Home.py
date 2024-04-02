@@ -39,8 +39,8 @@ st.write(
     """Dataset credits from <a href="https://beta.data.gov.sg/collections/189/view" target="_blank" >data.gov.sg</a>""",
     unsafe_allow_html=True,
 )
+st.markdown("### Number of Transactions per year")
 col1, col2 = st.columns(2)
-col1.markdown("### Number of Transactions per year")
 col1.dataframe(
     df_num_txns_txt.sort_values(
         "Year",
@@ -48,28 +48,8 @@ col1.dataframe(
     hide_index=True,
     use_container_width=True,
 )
-col2.markdown("### Average Price per year")
-col2.dataframe(
-    df_avg_price_txt.sort_values(
-        "Year",
-    ),
-    hide_index=True,
-    use_container_width=True,
-)
-col1, col2 = st.columns(2)
-col1.markdown("#### No. of Transactions per Year")
-col1.line_chart(df_num_txns, x="year", y="Number of txns")
-# For debugging
-# col1.dataframe(df_num_txns)
-# col1.write(df_num_txns.describe(include="all"))
-# col1.write(df_num_txns.dtypes)
+col2.line_chart(df_num_txns, x="year", y="Number of txns")
 
-col2.markdown("#### Average Price by Year")
-col2.line_chart(df_avg_price, x="year", y="Average Price")
-# For debugging
-# col2.dataframe(df_avg_price)
-# col2.write(df_avg_price.describe(include="all"))
-# col2.write(df_avg_price.dtypes)
 
 st.write(
     """Built by <a href="https://twitter.com/bryanblackbee" target="_blank" >bryanblackbee</a>""",

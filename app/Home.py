@@ -5,6 +5,7 @@ import pandas as pd
 import os
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))
+print(PROJECT_DIR)
 df = pd.read_csv(
     os.path.join(PROJECT_DIR, "assets", "entity-transaction.csv"),
 )
